@@ -1,0 +1,60 @@
+<div class="container">
+  <div id="login-row" class="row justify-content-center align-items-center">
+      <div id="login-column" class="col-md-6">
+          <div class="login-box col-md-12">
+              <form [formGroup] ="employeeForm" (ngSubmit)="onSubmit()" id="login-form" class="form"  method="post">
+                  <h3 class="text-center text-info">Create Employee</h3>
+                  <div class="form-group" [ngClass] ="{'has-error' : employeeForm.get('fullName').errors && (employeeForm.get('fullName').touched || employeeForm.get('fullName').dirty)}">
+                      <label for="username" class="text-info" >Full Name:</label><br>
+                      <input type="text" formControlName ="fullName" name="fullName" id="fullName" class="form-control">
+                      <span class="help-block" *ngIf = "employeeForm.get('fullName').errors && (employeeForm.get('fullName').touched || employeeForm.get('fullName').dirty)">  
+                        <span *ngIf = "employeeForm.get('fullName').errors.required">plz enter name</span>
+                        <span *ngIf = "employeeForm.get('fullName').errors.minlength || employeeForm.get('fullName').errors.maxlength ">
+                            plz enter max min value</span>
+                      </span>
+                    </div>
+                  <div class="form-group">
+                      <label for="password" class="text-info">Email:</label><br>
+                      <input type="text" formControlName ="email" name="email" id="email" class="form-control">
+                  </div>
+                  <div formGroupName="skills">
+                    <div class="form-group">
+                        <label for="skillName" class="col-sm-2 control-label">Skills</label>
+                        <div class="col-sm-4">
+                                <input type="text" formControlName ="skillName" name="skillName" id="skillName" class="form-control">   
+                        </div>
+                        <div class="col-sm-4">
+                                <input type="text" formControlName ="experienceInYear" name="experienceInYear" id="experienceInYear" class="form-control">   
+                        </div>
+                    </div>
+                        <div class="form-group">
+                                <label for="proficiency" class="col-sm-2 control-label">Proficiency</label>
+                                <div class="col-md-8">
+                                    <label class="radio-inline">
+                                            <input type="radio" formControlName ="proficiency" value="beginner" id="proficiency">Beginner
+                                    </label>
+                                    <label class="radio-inline">
+                                            <input type="radio" formControlName ="proficiency" value="intermidiate" id="proficiency">Intermidiate
+                                    </label>
+                                    <label class="radio-inline">
+                                            <input type="radio" formControlName ="proficiency" value="advanced" id="proficiency">Advanced
+                                    </label>
+                                </div>
+                        </div>
+                  </div>
+                  <div class="form-group">
+                      <div class="btn-toolbar">
+                      <input type="submit" name="submit" class="btn btn-info btn-md" value="submit">
+                      <input type="button" name="loaddata" class="btn btn-info btn-md" value="Load Data" (click)="onLoaddataClick()">
+                      </div>
+                  </div>
+                  
+              </form>
+              <table border=1>
+                  <tr><td>FormGroup</td></tr>
+                  <tr><td>form values : {{employeeForm.value|json}}</td></tr>
+              </table>
+          </div>
+      </div>
+  </div>
+</div>
